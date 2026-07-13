@@ -8,23 +8,10 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./nvidia.nix
+      ./docker.nix
     ];
   
-  nixpkgs.config.allowUnfree = true;
-  hardware.graphics.enable = true;  
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
-    prime = {
-      sync.enable = true;
-      intelBusId = "PCI:0@0:2:0";
-      nvidiaBusId = "PCI:1@0:0:0";
-    };
-  };
-
   zramSwap = {
     enable = true;
     algorithm = "zstd";
@@ -37,7 +24,7 @@
 
   # Use lts kernel.
   boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelParams = [];
+  #boot.kernelParams = [ "module_blacklist=i915" ];
 
   networking.hostName = "nixos-vault"; # Define your hostname.
 
@@ -91,6 +78,13 @@
     '';
   };
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.cig0073 = {
     isNormalUser = true;
@@ -98,7 +92,6 @@
     shell = pkgs.fish;
     packages = with pkgs; [
       tree
-      librewolf
     ];
   };
 
@@ -112,11 +105,15 @@
     git
     fastfetch
     btop
+    dillo
+    adwsteamgtk
+    yazi
     #xfce specific stuff
     chicago95
     xfce4-panel-profiles
     xfce4-whiskermenu-plugin
     xfwm4-themes
+    gtk4
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
