@@ -3,7 +3,7 @@
 {
 
   imports = [
-  	./docker-compose.nix
+#  	./docker-compose.nix
   ];
   virtualisation.docker = {
     enable = true;
