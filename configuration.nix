@@ -9,7 +9,8 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./nvidia.nix
-      ./docker.nix
+      #./docker.nix
+      ./gaming.nix
     ];
   
   zramSwap = {
@@ -59,14 +60,6 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
@@ -76,13 +69,6 @@
       set fish_greeting # Disable greeting
       fastfetch
     '';
-  };
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -95,7 +81,7 @@
     ];
   };
 
-  # programs.firefox.enable = true;
+  programs.firefox.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -105,15 +91,12 @@
     git
     fastfetch
     btop
-    dillo
-    adwsteamgtk
     yazi
     #xfce specific stuff
     chicago95
     xfce4-panel-profiles
     xfce4-whiskermenu-plugin
     xfwm4-themes
-    gtk4
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

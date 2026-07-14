@@ -19,10 +19,7 @@
   };
 
   environment.sessionVariables = {
-    __NV_PRIME_RENDER_OFFLOAD = "1";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     __VK_LAYER_NV_optimus = "NVIDIA_only";
-
     # Force all modern GTK4 apps to render cleanly without a 3D compositor
     GSK_RENDERER = "cairo";
   };
