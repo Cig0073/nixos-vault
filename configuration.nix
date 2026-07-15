@@ -79,11 +79,25 @@
     shell = pkgs.fish;
     packages = with pkgs; [
       tree
+      tldr
+      jellyfin-tui
     ];
   };
 
   programs.firefox.enable = true;
 
+  programs.appimage.enable = true;
+  #programs.appimage.binfmt = true;
+  programs.appimage.package = pkgs.appimage-run.override 
+  {
+    extraPkgs = pkgs: 
+    [
+      pkgs.icu
+      #pkgs.libxcrypt-legacy
+      #pkgs.python312
+     # pkgs.python312Packages.torch
+    ]; 
+  };
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
@@ -98,6 +112,7 @@
     xfce4-panel-profiles
     xfce4-whiskermenu-plugin
     xfwm4-themes
+    xfce4-clipman-plugin
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

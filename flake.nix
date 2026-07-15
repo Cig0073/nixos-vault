@@ -3,6 +3,8 @@
 
    inputs = {
      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+     arion.url = "github:hercules-ci/arion";
+     arion.inputs.nixpkgs.follows = "nixpkgs";
      millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
    };
 
@@ -15,9 +17,8 @@
          ./configuration.nix 
          ./nvidia.nix
          ./gaming.nix
-         #./docker.nix
+         ./docker.nix
          {
-           nixpkgs.overlays = [ inputs.millennium.overlays.default ];
            #nixpkgs.config.allowUnfree = true;
          }
          ];

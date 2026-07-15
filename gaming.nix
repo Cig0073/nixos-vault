@@ -1,7 +1,8 @@
-{config, libs, pkgs, ...}:
+{config, libs, pkgs, inputs, ...}:
 
 {
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [ inputs.millennium.overlays.default ];
   programs.steam = {
     enable = true;
     package = pkgs.millennium-steam;
