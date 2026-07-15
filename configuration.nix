@@ -8,9 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./nvidia.nix
-      #./docker.nix
-      ./gaming.nix
     ];
   
   zramSwap = {
@@ -49,7 +46,11 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
+  services.xserver.desktopManager.xfce = {
+    enable = true;
+    enableWaylandSession = true;
+  };
+  services.xserver.desktopManager.xterm.enable = false;
   services.xserver.displayManager.startx.enable = true;
   
 

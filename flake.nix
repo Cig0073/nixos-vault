@@ -2,8 +2,8 @@
   description = "A clean, modular NixOS system configuration flake";
 
    inputs = {
-     # Using unstable by default; switch to a specific channel like "nixos-24.05" if preferred
      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
    };
 
    outputs = { self, nixpkgs, ... }@inputs: {
@@ -11,9 +11,14 @@
 	   nixos-vault = nixpkgs.lib.nixosSystem {
 	     system = "x86_64-linux";
 	     specialArgs = { inherit inputs; }; 
-         modules = [ ./configuration.nix 
+         modules = [ 
+         ./configuration.nix 
+         ./nvidia.nix
+         ./gaming.nix
+         #./docker.nix
          {
-             #nixpkgs.config.allowUnfree = true;
+           nixpkgs.overlays = [ inputs.millennium.overlays.default ];
+           #nixpkgs.config.allowUnfree = true;
          }
          ];
 	  };

@@ -4,6 +4,7 @@
   nixpkgs.config.allowUnfree = true;
   programs.steam = {
     enable = true;
+    package = pkgs.millennium-steam;
   };
   environment.systemPackages = with pkgs; [
 	ludusavi
